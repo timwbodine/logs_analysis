@@ -13,4 +13,5 @@ create view errors_per_day as select date_part('day', time) as day, count(*) as 
 create view views_per_day as select date_part('day', time) as day, count(*) as views from log where status = '200 OK' group by day order by day asc;
 ```
 alternatively, you can run ```python views.py``` to create these views.
+
 6. Run python news_reporter.py to generate the output.txt file with the logs analysis
