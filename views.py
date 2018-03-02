@@ -1,18 +1,20 @@
 """views.py generates the views which are necessary to run news_reporter.py"""
 import psycopg2
 
+
 def connect(database):
     """connect to the database.  alternatively, print an error message."""
     try:
         db = psycopg2.connect("dbname={}".format(database))
         cursor = db.cursor()
         return db, cursor
-    except:
+    except Exception:
         print("There was an error connecting to the database.")
+
 
 def addNecessaryViews():
     """add each of the views and commit to the database"""
-    db, cursor = connect("news");
+    db, cursor = connect("news")
     cursor.execute("create view views_by_author_id as select articles.au"
                    "thor, count(*) as num from articles, log where substri"
                    "ng(log.path from '/article/(.*)')=articles.slug group "

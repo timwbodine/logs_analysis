@@ -1,5 +1,7 @@
-"""news_reporter.py generates several tables from the newsdata.sql data, organizing data by most popular authors, most popular articles, and high error days."""
 #!/usr/bin/python
+"""news_reporter.py generates several tables from the newsdata.sql data,
+organizing data by most popular authors, most popular articles, and high
+error days."""
 import psycopg2
 from tabulate import tabulate
 
@@ -10,8 +12,9 @@ def connect(database):
         db = psycopg2.connect("dbname={}".format(database))
         cursor = db.cursor()
         return db, cursor
-    except:
+    except Exception:
         print("There was an error connecting to the database.")
+
 
 def get_most_popular_articles():
     """get a list of the top 3 most popular articles by all time views"""
@@ -23,7 +26,8 @@ def get_most_popular_articles():
 
 
 def get_most_popular_authors():
-    """get a list of the top 4 most popular authors by all time views of articles written by them"""
+    """get a list of the top 4 most popular authors by all time views of articles
+    written by them"""
     db, c = connect("news")
     c.execute("select authors.name, views_by_author_id.num from views_by_auth"
               "or_id, authors where views_by_author_id.author = authors.id"
@@ -32,13 +36,15 @@ def get_most_popular_authors():
 
 
 def get_high_error_days():
-    """find and list any days on which the percentage of connections resulting in error exceeded 1%"""
+    """find and list any days on which the percentage of connections resulting in
+    error exceeded 1%"""
     db, c = connect("news")
     c.execute("select views_per_day.day, float4((errors_per_day.errors * 100."
               "0)/views_per_day.views) as perc from errors_per_day, views_per"
               "_day where views_per_day.day = errors_per_day.day and float4(("
               "errors_per_day.errors * 100.0)/views_per_day.views) >= 1.0;")
     return c.fetchall()
+
 
 """use tabulate library to format tables written to output.txt"""
 with open('output.txt', 'w') as output:
