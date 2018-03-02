@@ -8,18 +8,17 @@ def get_most_popular_articles():
     c = db.cursor()
     c.execute("select articles.title, count(*) from articles, log where subst"
               "ring(log.path from '/article/(.*)')=articles.slug group by"
-              " articles.title order by count desc;")
+              " articles.title order by count desc limit 3;")
     return c.fetchall()
-    db.close()
 
 
 def get_most_popular_authors():
     db = psycopg2.connect("dbname=news")
     c = db.cursor()
     c.execute("select authors.name, views_by_author_id.num from views_by_auth"
-              "or_id, authors where views_by_author_id.author = authors.id;")
+              "or_id, authors where views_by_author_id.author = authors.id"
+              " limit 4;")
     return c.fetchall()
-    db.close()
 
 
 def get_high_error_days():
@@ -30,7 +29,6 @@ def get_high_error_days():
               "_day where views_per_day.day = errors_per_day.day and float4(("
               "errors_per_day.errors * 100.0)/views_per_day.views) >= 1.0;")
     return c.fetchall()
-    db.close()
 
 
 with open('output.txt', 'w') as output:

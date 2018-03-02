@@ -1,15 +1,10 @@
 Most Popular Articles
 
-Articles                              Views
-----------------------------------  -------
-Candidate is jerk, alleges rival     338647
-Bears love berries, alleges bear     253801
-Bad things gone, say good people     170098
-Goats eat Google's lawn               84906
-Trouble for troubled troublemakers    84810
-Balloon goons doomed                  84557
-There are a lot of bears              84504
-Media obsessed with bears             84383
+Articles                            Views
+--------------------------------  -------
+Candidate is jerk, alleges rival   338647
+Bears love berries, alleges bear   253801
+Bad things gone, say good people   170098
 
 Most Popular Authors
 
