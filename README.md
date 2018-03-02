@@ -10,8 +10,8 @@ This project assumes you are running the Vagrant VM specified for this project.
 6. open the psql console with ```psql -d news```, and add the following views:
 ```
 create view views_by_author_id as select articles.author, count(*) as num from articles, log where substring(log.path from '/article/(.*)')=articles.slug group by articles.author order by num desc;
-create view errors_per_day as select date_part('day', time) as day, count(*) as errors from log where status != '200 OK' group by day order by day asc;
-create view views_per_day as select date_part('day', time) as day, count(*) as views from log where status = '200 OK' group by day order by day asc;
+create view errors_per_day as select date_trunc('day', time) as day, count(*) as errors from log where status != '200 OK' group by day order by day asc;
+create view views_per_day as select date_trunc('day', time) as day, count(*) as views from log where status = '200 OK' group by day order by day asc;
 ```
 alternatively, you can run ```python views.py``` to create these views.
 
