@@ -19,4 +19,4 @@ High Error Days
 
   Day    % Errors
 -----  ----------
-   17     2.31507
+   17     2.26269
