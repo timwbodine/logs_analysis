@@ -62,4 +62,6 @@ def run_program(output_file):
         print_and_write('\n\nHigh Error Days\n\n')
         lines = get_high_error_days()
         print_and_write(tabulate(lines, headers=['Day', '% Errors']))
+
+
 run_program('output.txt')
