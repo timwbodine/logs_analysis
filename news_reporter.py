@@ -26,7 +26,7 @@ def get_most_popular_articles():
 
 
 def get_most_popular_authors():
-    """get a list of the top 4 most popular authors by all time views of articles
+    """get a list of the most popular authors by all time views of articles
     written by them"""
     db, c = connect("news")
     c.execute("select authors.name, views_by_author_id.num from views_by_auth"
@@ -46,7 +46,7 @@ def get_high_error_days():
     return c.fetchall()
 
 
-def execute(output_file):
+def run_program(output_file):
     with open(output_file, 'w') as output:
         def print_and_write(line):
             """use tabulate library to format tables written to output.txt. Also
@@ -62,4 +62,4 @@ def execute(output_file):
         print_and_write('\n\nHigh Error Days\n\n')
         lines = get_high_error_days()
         print_and_write(tabulate(lines, headers=['Day', '% Errors']))
-execute('output.txt')
+run_program('output.txt')
